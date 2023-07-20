@@ -1,0 +1,42 @@
+extends layout.pug 
+
+block content 
+    .row.mt-4
+        .col-.col-md-8
+            h1 Contact List 
+        .col-.col-md-4.d-inline-flex.justify-content-start.justify-content-md-end
+            a(href='/create').btn.btn-outline-primary.align-self-center Create a new contact
+    .list-group.my-2
+        each c in contacts
+            .list-group-item.my-2
+                .row.my-1
+                    .col-.col-lg-2
+                        a(href='/'+c.id) #{c.first_name} #{c.last_name}
+                    .col-.col-lg-2.mt-2.mt-lg-0
+                        span #{c.phone_number}
+                    .col-.col-lg-3
+                        span #{c.email_address}
+                    .col-.col-lg-3.my-2.my-lg-0
+                        if c.street
+                            section #{c.street}
+                        section 
+                            if c.city
+                                span #{c.city}, 
+                            if c.state
+                                span #{c.state} 
+                            if c.zip
+                                span #{c.zip}
+                        if c.country
+                            section #{c.country}
+                    .col-.col-lg-2.my-2.my-lg-0
+                        section
+                            input(id='phone'+c.id, type='checkbox', disabled, checked = (c.contact_by_phone == 0 ? false : true))
+                            label(for="phone").mx-2 Phone
+                        section
+                            input(id='email'+c.id, type='checkbox', disabled, checked = (c.contact_by_email == 0 ? false : true))
+                            label(for="email").mx-2 Email
+                        section
+                            input(id='mail'+c.id, type='checkbox', disabled, checked = (c.contact_by_mail == 0 ? false : true))
+                            label(for="mail").mx-2 Mail
+                        
+                        

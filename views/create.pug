@@ -1,0 +1,58 @@
+extends layout.pug 
+
+block content   
+    h1.mt-4.mb-3 Create Contact
+
+    form(action='/create', method='post', novalidate, class = ((show_valid)? 'was-validated':'needs-validation'))
+        .row
+            .col-.col-xl-6
+                fieldset.border.px-4.pb-4
+                    legend.float-none.w-auto.px-2 Basic Info 
+                    .form-floating.my-1
+                        input(type='text', name = 'first', value = info.first, required, placeholder = 'ex').form-control
+                        label(for='first').form-label First Name:    
+                    .form-floating.my-1
+                        input(type='text', name = 'last', value = info.last, required, placeholder = 'ex').form-control
+                        label(for='last').form-label Last Name:
+                    .form-floating.my-1
+                        input(type='text', name = 'phone', value = info.phone, required, placeholder = 'ex').form-control
+                        label(for='phone').form-label Phone:               
+                    .form-floating.my-1
+                        input(type='text', name = 'email', value = info.email, required, placeholder = 'ex').form-control
+                        label(for='email').form-label Email:                
+            .col-.col-xl-6    
+                fieldset.border.px-4.pb-4
+                    legend.float-none.w-auto.px-2 Address 
+                    .form-floating.my-1
+                        input(type='text', name = 'street', value = info.street, required, placeholder = 'ex').form-control
+                        label(for='street').form-label Street:                
+                    .form-floating.my-1
+                        input(type='text', name = 'city', value = info.city, required, placeholder = 'ex').form-control
+                        label(for='city').form-label City:
+                    .form-floating.my-1
+                        input(type='text', name = 'state', value = info.state, required, placeholder = 'ex').form-control
+                        label(for='state').form-label State:
+                    .form-floating.my-1
+                        input(type='text', name = 'zip', value = info.zip, required, placeholder = 'ex').form-control
+                        label(for='zip').form-label Zip:
+                    .form-floating.my-1
+                        input(type='text', name = 'country', value = info.country, required, placeholder = 'ex').form-control
+                        label(for='country').form-label Country:
+        
+        .row
+            .col-12
+                fieldset.border.px-4.pb-4 
+                    legend.float-none.w-auto.px-2 Contact Preferences 
+                    section
+                        input(name='by_phone', type='checkbox', checked = (info.by_phone == 'on' ? true : false)).form-check-input
+                        label(for="by_phone").form-check-label.mx-2 Phone
+                    section
+                        input(name='by_email', type='checkbox', checked = (info.by_email == 'on' ? true : false)).form-check-input
+                        label(for="by_email").form-check-label.mx-2 Email
+                    section
+                        input(name='by_mail', type='checkbox', checked = (info.by_mail == 'on' ? true : false)).form-check-input
+                        label(for="by_mail").form-check-label.mx-2 Mail
+
+        .d-flex.justify-content-end
+            button(type='submit').btn.btn-primary.my-4 Add 
+            a(href='/').btn.btn-secondary.mx-2.align-self-center Cancel            

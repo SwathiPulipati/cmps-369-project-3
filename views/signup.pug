@@ -1,0 +1,37 @@
+extends layout.pug 
+
+block content
+    .card.p-2.mt-4  
+        .card-header
+            h1 Sign up
+        .card-body 
+            form(action='/signup', method='post', novalidate, class = ((show_valid)? 'was-validated':'needs-validation'))
+                .row
+                    .col-.col-xl-6.align-items-center
+                        .form-floating.my-2
+                            input(type='text', name = 'first', placeholder = 'ex', value = info.first, required).form-control
+                            label(for='first').form-label First Name:                
+                        .form-floating.my-2 
+                            input(type='text', name='last', placeholder = 'ex', value = info.last, required).form-control
+                            label(for='last').form-label  Last Name:      
+                    .col-.col-xl-6             
+                        .form-floating.my-2
+                            input(type='text', name = 'username', placeholder = 'ex', value = info.username, required).form-control
+                            label(for='email').form-label Username:                   
+                        .form-floating.my-2 
+                            input(type='password', name='password', placeholder = 'ex', value = info.password, required).form-control
+                            label(for='password').form-label  Password:                   
+                        .form-floating.my-2 
+                            input(type='password', name='password2', placeholder = 'ex', value = info.password2, required).form-control
+                            label(for='password2').form-label Confirm Password:                   
+                
+                button(type='submit').btn.btn-primary.mt-4 Sign Up
+                a(href='/').btn.btn-secondary.mx-2.mt-4 Nevermind
+
+                if (message)
+                    .alert.alert-danger.w-auto.float-md-end.mt-3
+                        i #{message}
+
+    .alert.alert-warning.mt-2 
+        span Already have an account? 
+        a(href='/login') Sign in here!

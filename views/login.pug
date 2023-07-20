@@ -1,0 +1,27 @@
+extends layout.pug 
+
+block content
+    .card.p-2.mt-4
+        .card-header 
+            h1 Sign in
+        .card-body 
+            form(action='/login', method='post')
+                .form-floating.my-2
+                    input(type='text', name = 'username', placeholder = 'ex').form-control
+                    label(for='username').form-label Username:
+                .form-floating.my-2 
+                    input(type='password', name='password', placeholder = 'ex').form-control
+                    label(for='password').form-label  Password:
+
+                br
+                button(type='submit').btn.btn-primary.mt-1 Sign in 
+                a(href='/').btn.btn-secondary.mx-2.mt-1 Nevermind
+
+                if (message)
+                    .alert.alert-danger.w-auto.float-md-end
+                        i #{message}
+        
+    
+    .alert.alert-warning.mt-2
+        span Don't have an account yet? 
+        a(href='/signup') Sign up here!

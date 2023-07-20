@@ -1,0 +1,72 @@
+extends layout.pug
+
+mixin if_checked(checked, method)
+    if checked == 0
+        i(style='color:red') May NOT be contacted by #{method}
+    else    
+        i(style='color:green') May be contacted by #{method}
+
+block content 
+    .row.mt-4.mb-2
+        .col-.col-md-8
+            h2 #{c.first_name} #{c.last_name} 
+        .col-.col-md-4.d-inline-flex.justify-content-start.justify-content-md-end
+            a(href='/').btn.btn-outline-primary.align-self-center Back to list
+    .row
+        .col-.col-xl-6
+            .card.p-2.mb-2                 
+                .card-body 
+                    h5 Phone Number:
+                    section #{c.phone_number}
+                    section.mt-2
+                        +if_checked(c.contact_by_phone, 'phone or text')
+        .col-.col-xl-6
+            .card.p-2.mb-2                  
+                .card-body 
+                    h5 Email Address:
+                    section #{c.email_address}
+                    section.mt-2
+                        +if_checked(c.contact_by_email, 'email')
+    .row
+        .col-12
+            .card.p-2                  
+                .card-body 
+                    h5 Address:
+                    if c.street
+                        section #{c.street}
+                    section 
+                        if c.city
+                            span #{c.city}, 
+                        if c.state
+                            span #{c.state} 
+                        if c.zip
+                            span #{c.zip}
+                    if c.country
+                        section #{c.country}
+                    section.mt-2
+                        +if_checked(c.contact_by_mail, 'mail')
+
+
+    if user
+        .d-flex.justify-content-end.mt-2
+            a(href='/'+c.id+'/edit').btn.btn-outline-success Edit Contact
+            a(data-bs-toggle='modal', data-bs-target='#delete_modal').btn.btn-outline-danger.mx-2 Delete Contact 
+    else      
+        .alert.alert-warning.mt-2
+            span Sign in to edit and/or delete contacts!
+
+    div(id='delete_modal').modal.fade
+        .modal-dialog   
+            .modal-content 
+                .modal-header 
+                    h3.modal-title Delete Contact 
+                .modal-body 
+                    span Are you sure you want to delete the contact: <i><b> #{c.first_name} #{c.last_name} </b></i>?
+                .modal-footer 
+                    button(type="button", data-bs-dismiss="modal").btn.btn-secondary Close
+                    form(action='/'+c.id+'/delete', method='post')
+                        button(type="submit", data-bs-dismiss="modal").btn.btn-danger Delete
+
+
+
+
